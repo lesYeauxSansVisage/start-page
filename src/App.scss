@@ -1,7 +1,17 @@
+@import 'sass/abstracts/variables';
 @import 'sass/base/base';
+@import 'sass/base/typography';
+@import 'sass/base/layout';
 @import 'sass/components/background';
 
 
-p {
-    color: white;
+
+.container {
+    padding: 50px;
+    width: 100vw;
+    height: 100vh;
+
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    grid-template-rows: 70% 1fr;
 }
