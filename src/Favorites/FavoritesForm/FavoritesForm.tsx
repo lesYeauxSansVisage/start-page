@@ -1,13 +1,26 @@
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import "./FavoritesForm.scss";
 import { Favorite } from "../Favorites";
 
 type FavoritesFormProps = {
   onClose: () => void;
-  onAdd: (favorite: Favorite) => void;
+  onAdd: (formValues: FormValues) => void;
+  editMode: boolean;
+  editData: null | Favorite;
 };
 
-const FavoritesForm = ({ onClose, onAdd }: FavoritesFormProps) => {
+export type FormValues = {
+  name: string;
+  url: string;
+  icon: string;
+};
+
+const FavoritesForm = ({
+  onClose,
+  onAdd,
+  editMode,
+  editData,
+}: FavoritesFormProps) => {
   const [name, setName] = useState("");
   const [link, setLink] = useState("");
   const [icon, setIcon] = useState("");
@@ -19,13 +32,13 @@ const FavoritesForm = ({ onClose, onAdd }: FavoritesFormProps) => {
       return;
     }
 
-    const favorite = {
+    const formData: FormValues = {
       name: name,
       url: link,
       icon: icon,
     };
 
-    onAdd(favorite);
+    onAdd(formData);
 
     onClose();
   };
@@ -47,8 +60,23 @@ const FavoritesForm = ({ onClose, onAdd }: FavoritesFormProps) => {
 
   const isValid = name.length > 0 && link.length > 0 && icon.length > 0;
 
+  let buttonText = "Add Favorite";
+
+  useEffect(() => {
+    if (editMode) {
+      setName(editData?.name as string);
+      setLink(editData?.url as string);
+      setIcon(editData?.icon as string);
+    }
+  }, [editMode, editData, isValid, name, link, icon, buttonText]);
+
+  if (editMode) {
+    buttonText = "Edit Favorite";
+  }
+
   return (
     <form onSubmit={handleSubmit} className="favorites-form">
+      {editMode && <h2 style={{ color: "#fff" }}>Edit mode</h2>}
       <button
         type="button"
         className="button favorites-form__close-button"
@@ -88,7 +116,7 @@ const FavoritesForm = ({ onClose, onAdd }: FavoritesFormProps) => {
         className="button favorites-form__button-submit"
         disabled={!isValid}
       >
-        Add Favorite
+        {buttonText}
       </button>
     </form>
   );
