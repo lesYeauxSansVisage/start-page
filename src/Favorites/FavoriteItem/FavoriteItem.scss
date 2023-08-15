@@ -5,10 +5,7 @@ $background-dark: #191919;
     position: relative;
     border-radius: 0.3rem;
     transition: all 0.2s ease-in;
-
-    &:hover {
-        background-color: rgba($background-light, 0.3);
-    }
+    overflow: hidden;
 
     &:hover .item__button {
         visibility: visible;
@@ -57,6 +54,10 @@ $background-dark: #191919;
         transform: translate(-50%, -50%);
 
         cursor: pointer;
+
+        &:hover {
+            background-color: rgba($background-light, 0.3);
+        }
     }
 
     &__name {
