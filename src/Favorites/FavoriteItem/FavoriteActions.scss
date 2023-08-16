@@ -1,0 +1,25 @@
+.favorite__actions {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    z-index: 51;
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    button {
+        background-color: var(--color-dark-3);
+        color: var(--color-light-grey-3);
+        padding: 0.5rem 0;
+        font-size: 1.5rem;
+        transition: 0.3s ease all;
+
+        &:first-child {
+            border-bottom: var(--color-light-grey-2) 1px solid;
+        }
+
+        &:hover {
+            background-color: var(--color-dark-1);
+        }
+    }
+}
