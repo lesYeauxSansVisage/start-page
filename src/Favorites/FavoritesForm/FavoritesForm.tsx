@@ -25,6 +25,10 @@ const FavoritesForm = ({
   const [link, setLink] = useState("");
   const [icon, setIcon] = useState("");
 
+  let buttonText = editMode ? "Edit Favorite" : "Add Favorite";
+
+  const isValid = name.length > 0 && link.length > 0 && icon.length > 0;
+
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -38,7 +42,13 @@ const FavoritesForm = ({
       icon: icon,
     };
 
-    onAdd(formData);
+    if (editMode) {
+      console.log("Form was submitted with edit mode on!");
+    } else {
+      console.log("Form was submitted with normal mode (add)");
+
+      onAdd(formData);
+    }
 
     onClose();
   };
@@ -58,25 +68,16 @@ const FavoritesForm = ({
     setIcon(input);
   };
 
-  const isValid = name.length > 0 && link.length > 0 && icon.length > 0;
-
-  let buttonText = "Add Favorite";
-
   useEffect(() => {
     if (editMode) {
       setName(editData?.name as string);
       setLink(editData?.url as string);
       setIcon(editData?.icon as string);
     }
-  }, [editMode, editData, isValid, name, link, icon, buttonText]);
-
-  if (editMode) {
-    buttonText = "Edit Favorite";
-  }
+  }, []);
 
   return (
     <form onSubmit={handleSubmit} className="favorites-form">
-      {editMode && <h2 style={{ color: "#fff" }}>Edit mode</h2>}
       <button
         type="button"
         className="button favorites-form__close-button"
