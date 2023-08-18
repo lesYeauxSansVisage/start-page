@@ -87,15 +87,17 @@ const FavoritesForm = ({
       </button>
       <div className="favorites-form__control">
         <input
+          id="name"
           type="text"
           name="name"
           value={name}
           onChange={nameChangeHandler}
         />
-        <label htmlFor="">Name</label>
+        <label htmlFor="name">Name</label>
       </div>
       <div className="favorites-form__control">
         <input
+          id="link"
           type="text"
           name="link"
           value={link}
@@ -105,6 +107,7 @@ const FavoritesForm = ({
       </div>
       <div className="favorites-form__control">
         <input
+          id="icon"
           type="text"
           name="icon"
           value={icon}
