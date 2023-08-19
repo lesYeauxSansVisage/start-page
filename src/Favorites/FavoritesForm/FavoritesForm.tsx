@@ -5,6 +5,7 @@ import { Favorite } from "../Favorites";
 type FavoritesFormProps = {
   onClose: () => void;
   onAdd: (formValues: FormValues) => void;
+  onEdit: (id: number, updatedData: FormValues) => void;
   editMode: boolean;
   editData: null | Favorite;
 };
@@ -20,6 +21,7 @@ const FavoritesForm = ({
   onAdd,
   editMode,
   editData,
+  onEdit,
 }: FavoritesFormProps) => {
   const [name, setName] = useState("");
   const [link, setLink] = useState("");
@@ -43,10 +45,8 @@ const FavoritesForm = ({
     };
 
     if (editMode) {
-      console.log("Form was submitted with edit mode on!");
+      onEdit(editData?.id!, formData);
     } else {
-      console.log("Form was submitted with normal mode (add)");
-
       onAdd(formData);
     }
 
