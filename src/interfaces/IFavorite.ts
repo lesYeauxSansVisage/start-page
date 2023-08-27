@@ -1,4 +1,4 @@
-export interface Favorite {
+export interface FavoriteType {
   id: number;
   name: string;
   url: string;
