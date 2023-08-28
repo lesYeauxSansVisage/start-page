@@ -1,13 +1,14 @@
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useContext, useEffect, useState } from "react";
 import "./FavoritesForm.scss";
-import { Favorite } from "../Favorites";
+import Backdrop from "../../UI/Backdrop";
+import { FavoriteType } from "../../interfaces/IFavorite";
+import ReactDOM from "react-dom";
+import FavoritesContext from "../../context/favorites-context";
 
 type FavoritesFormProps = {
   onClose: () => void;
-  onAdd: (formValues: FormValues) => void;
-  onEdit: (id: number, updatedData: FormValues) => void;
   editMode: boolean;
-  editData: null | Favorite;
+  editData: null | FavoriteType;
 };
 
 export type FormValues = {
@@ -16,25 +17,26 @@ export type FormValues = {
   icon: string;
 };
 
-const FavoritesForm = ({
-  onClose,
-  onAdd,
-  editMode,
-  editData,
-  onEdit,
-}: FavoritesFormProps) => {
+const FavoritesForm = ({ onClose, editMode, editData }: FavoritesFormProps) => {
   const [name, setName] = useState("");
   const [link, setLink] = useState("");
   const [icon, setIcon] = useState("");
 
+  const favContext = useContext(FavoritesContext);
+
   let buttonText = editMode ? "Edit Favorite" : "Add Favorite";
 
-  const isValid = name.length > 0 && link.length > 0 && icon.length > 0;
+  const isValid =
+    name.trim().length > 0 && link.trim().length > 0 && icon.trim().length > 0;
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (name.length === 0 || link.length === 0 || icon.length == 0) {
+    if (
+      name.trim().length === 0 ||
+      link.trim().length === 0 ||
+      icon.trim().length == 0
+    ) {
       return;
     }
 
@@ -45,21 +47,21 @@ const FavoritesForm = ({
     };
 
     if (editMode) {
-      onEdit(editData?.id!, formData);
+      favContext?.editFavorite(editData?.id!, formData);
     } else {
-      onAdd(formData);
+      favContext?.addFavorite(formData);
     }
 
     onClose();
   };
 
   const nameChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const input = e.target.value.trim();
+    const input = e.target.value;
     setName(input);
   };
 
   const linkChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const input = e.target.value.trim();
+    const input = e.target.value;
     setLink(input);
   };
 
@@ -77,52 +79,55 @@ const FavoritesForm = ({
   }, []);
 
   return (
-    <form onSubmit={handleSubmit} className="favorites-form">
-      <button
-        type="button"
-        className="button favorites-form__close-button"
-        onClick={onClose}
-      >
-        <i className="fa-solid fa-x"></i>
-      </button>
-      <div className="favorites-form__control">
-        <input
-          id="name"
-          type="text"
-          name="name"
-          value={name}
-          onChange={nameChangeHandler}
-        />
-        <label htmlFor="name">Name</label>
-      </div>
-      <div className="favorites-form__control">
-        <input
-          id="link"
-          type="text"
-          name="link"
-          value={link}
-          onChange={linkChangeHandler}
-        />
-        <label htmlFor="link">Link</label>
-      </div>
-      <div className="favorites-form__control">
-        <input
-          id="icon"
-          type="text"
-          name="icon"
-          value={icon}
-          onChange={iconChangeHandler}
-        />
-        <label htmlFor="icon">Icon</label>
-      </div>
-      <button
-        type="submit"
-        className="button favorites-form__button-submit"
-        disabled={!isValid}
-      >
-        {buttonText}
-      </button>
-    </form>
+    <>
+      <form onSubmit={handleSubmit} className="favorites-form">
+        <button
+          type="button"
+          className="button favorites-form__close-button"
+          onClick={onClose}
+        >
+          <i className="fa-solid fa-x"></i>
+        </button>
+        <div className="favorites-form__control">
+          <input
+            id="name"
+            type="text"
+            name="name"
+            value={name}
+            onChange={nameChangeHandler}
+          />
+          <label htmlFor="name">Name</label>
+        </div>
+        <div className="favorites-form__control">
+          <input
+            id="link"
+            type="text"
+            name="link"
+            value={link}
+            onChange={linkChangeHandler}
+          />
+          <label htmlFor="link">Link</label>
+        </div>
+        <div className="favorites-form__control">
+          <input
+            id="icon"
+            type="text"
+            name="icon"
+            value={icon}
+            onChange={iconChangeHandler}
+          />
+          <label htmlFor="icon">Icon</label>
+        </div>
+        <button
+          type="submit"
+          className="button favorites-form__button-submit"
+          disabled={!isValid}
+        >
+          {buttonText}
+        </button>
+      </form>
+      {ReactDOM.createPortal(<Backdrop />, document.body)}
+    </>
   );
 };
 
