@@ -62,9 +62,15 @@ $background-dark: #191919;
 
     &__name {
         text-transform: uppercase;
-        letter-spacing: 1px;
+        letter-spacing: 0.5px;
         color: var(--color-light-grey-2);
         font-size: 1.2rem;
+        text-align: center;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width: 80%;
+        font-weight: 700;
     }
 
     &__icon {
