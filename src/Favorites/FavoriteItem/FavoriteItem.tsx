@@ -1,25 +1,20 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import "./FavoriteItem.scss";
 import FavoriteActions from "./FavoriteActions";
+import FavoritesContext from "../../context/favorites-context";
 
 type FavoriteItemProps = {
   id: number;
   name: string;
   icon: string;
   url: string;
-  onDelete: (id: number) => void;
   onEdit: (id: number) => void;
 };
 
-function FavoriteItem({
-  id,
-  name,
-  icon,
-  url,
-  onDelete,
-  onEdit,
-}: FavoriteItemProps) {
+function FavoriteItem({ id, name, icon, url, onEdit }: FavoriteItemProps) {
   const [openActions, setOpenActions] = useState(false);
+
+  const favContext = useContext(FavoritesContext);
 
   const openActionsHandler = () => {
     setOpenActions(true);
@@ -34,7 +29,7 @@ function FavoriteItem({
   };
 
   const deleteHandler = () => {
-    onDelete(id);
+    favContext?.deleteFavorite(id);
   };
 
   return (
