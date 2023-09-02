@@ -1,8 +1,8 @@
 .favorites__img {
-    background-image: url('src/assets/5675257.gif');
+    width: 30rem;
+    height: 100%;
+    background-image: url('./assets/1000x1000.jpg');
     background-position: center;
     background-size: cover;
-
-    grid-row: 1 / -1;
-    grid-column: 1 / 2;
+    background-repeat: no-repeat;
 }
