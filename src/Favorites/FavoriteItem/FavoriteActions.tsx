@@ -18,8 +18,8 @@ const FavoriteActions = ({
 
   const deleteFavoriteHandler = () => {
     onDelete();
+    onClose();
   };
-  
 
   return (
     <div className="favorite__actions">
