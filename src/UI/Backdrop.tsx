@@ -1,6 +1,7 @@
+import { PropsWithChildren } from "react";
 import "./Backdrop.scss";
 
-const Backdrop = () => {
-  return <div className="backdrop"></div>;
+const Backdrop = (props: PropsWithChildren) => {
+  return <div className="backdrop">{props.children}</div>;
 };
 export default Backdrop;
