@@ -2,7 +2,6 @@ import { FormEvent, useContext, useEffect, useState } from "react";
 import "./FavoritesForm.scss";
 import Backdrop from "../../UI/Backdrop";
 import { FavoriteType } from "../../interfaces/IFavorite";
-import ReactDOM from "react-dom";
 import FavoritesContext from "../../context/favorites-context";
 
 type FavoritesFormProps = {
@@ -24,7 +23,7 @@ const FavoritesForm = ({ onClose, editMode, editData }: FavoritesFormProps) => {
 
   const favContext = useContext(FavoritesContext);
 
-  let buttonText = editMode ? "Edit Favorite" : "Add Favorite";
+  const buttonText = editMode ? "Edit Favorite" : "Add Favorite";
 
   const isValid =
     name.trim().length > 0 && link.trim().length > 0 && icon.trim().length > 0;
@@ -46,8 +45,8 @@ const FavoritesForm = ({ onClose, editMode, editData }: FavoritesFormProps) => {
       icon: icon,
     };
 
-    if (editMode) {
-      favContext?.editFavorite(editData?.id!, formData);
+    if (editMode && editData) {
+      favContext?.editFavorite(editData.id, formData);
     } else {
       favContext?.addFavorite(formData);
     }
@@ -76,10 +75,10 @@ const FavoritesForm = ({ onClose, editMode, editData }: FavoritesFormProps) => {
       setLink(editData?.url as string);
       setIcon(editData?.icon as string);
     }
-  }, []);
+  }, [editData, editMode]);
 
   return (
-    <>
+    <Backdrop>
       <form onSubmit={handleSubmit} className="favorites-form">
         <button
           type="button"
@@ -126,8 +125,7 @@ const FavoritesForm = ({ onClose, editMode, editData }: FavoritesFormProps) => {
           {buttonText}
         </button>
       </form>
-      {ReactDOM.createPortal(<Backdrop />, document.body)}
-    </>
+    </Backdrop>
   );
 };
 
