@@ -1,9 +1,12 @@
-import './App.scss'
+import "./App.scss";
+import Favorites from "./Favorites/Favorites";
 
 function App() {
-  return <>
-    <p>aaaaaaaaaaaaaaaa</p>
-  </>
+  return (
+    <div className="container">
+      <Favorites></Favorites>
+    </div>
+  );
 }
 
-export default App
+export default App;
