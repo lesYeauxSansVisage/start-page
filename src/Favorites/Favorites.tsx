@@ -19,7 +19,7 @@ function Favorites() {
 
   const [editId, setEditId] = useState(-1);
 
-  const showAddButton = favContext?.favorites.length! < 10;
+  const showAddButton = favContext.favorites.length < 10;
 
   if (editMode) {
     editData = favContext?.favorites.find(
