@@ -1,8 +1,8 @@
 import { FormEvent, useContext, useEffect, useState } from "react";
 import "./FavoritesForm.scss";
-import Backdrop from "../../UI/Backdrop";
 import { FavoriteType } from "../../interfaces/IFavorite";
 import FavoritesContext from "../../context/favorites-context";
+import Backdrop from "../../UI/Backdrop";
 
 type FavoritesFormProps = {
   onClose: () => void;
@@ -78,7 +78,8 @@ const FavoritesForm = ({ onClose, editMode, editData }: FavoritesFormProps) => {
   }, [editData, editMode]);
 
   return (
-    <Backdrop>
+    <>
+      <Backdrop onClick={onClose} />
       <form onSubmit={handleSubmit} className="favorites-form">
         <button
           type="button"
@@ -125,7 +126,7 @@ const FavoritesForm = ({ onClose, editMode, editData }: FavoritesFormProps) => {
           {buttonText}
         </button>
       </form>
-    </Backdrop>
+    </>
   );
 };
 
