@@ -1,7 +1,14 @@
-import { PropsWithChildren } from "react";
 import "./Backdrop.scss";
 
-const Backdrop = (props: PropsWithChildren) => {
-  return <div className="backdrop">{props.children}</div>;
+type BackdropProps = {
+  onClick: () => void;
+};
+
+const Backdrop = (props: BackdropProps) => {
+  const clickHandler = () => {
+    props.onClick();
+  };
+
+  return <div className="backdrop" onClick={clickHandler}></div>;
 };
 export default Backdrop;
