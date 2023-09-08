@@ -13,15 +13,19 @@ type FavoritesContextType = {
   editFavorite: (id: number, updatedData: FormValues) => void;
 };
 
-export const FavoritesContext = createContext<FavoritesContextType | null>(
-  null
-);
+export const FavoritesContext = createContext<FavoritesContextType>({
+  favorites: [],
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  addFavorite: (_formValues: FormValues) => {},
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  deleteFavorite: (_id: number) => {},
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  editFavorite: (_id: number, _updatedData: FormValues) => {},
+});
 
 export const FavoritesProvider = (props: Props) => {
   useEffect(() => {
     if (localStorage.getItem("favorites")) {
-      console.log("you have some saved favorites");
-
       const savedFavorites = JSON.parse(
         localStorage.getItem("favorites")!
       ) as FavoriteType[];
@@ -39,8 +43,6 @@ export const FavoritesProvider = (props: Props) => {
   useEffect(() => {
     if (favorites.length > 0) {
       localStorage.setItem("favorites", JSON.stringify(favorites));
-
-      console.log("I ran");
     } else {
       localStorage.removeItem("favorites");
     }
