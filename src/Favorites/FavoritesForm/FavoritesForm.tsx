@@ -1,6 +1,6 @@
 import { FormEvent, useContext, useEffect, useState } from "react";
 import "./FavoritesForm.scss";
-import { FavoriteType } from "../../interfaces/IFavorite";
+import { FavoriteType } from "../../interfaces/FavoriteType";
 import FavoritesContext from "../../context/favorites-context";
 import Backdrop from "../../UI/Backdrop";
 

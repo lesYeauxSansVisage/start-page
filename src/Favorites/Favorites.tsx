@@ -5,7 +5,7 @@ import "./Favorites.scss";
 import FavoriteItem from "./FavoriteItem/FavoriteItem";
 import { useState, useContext } from "react";
 import FavoritesForm from "./FavoritesForm/FavoritesForm";
-import { FavoriteType } from "../interfaces/IFavorite";
+import { FavoriteType } from "../interfaces/FavoriteType";
 import FavoritesContext from "../context/favorites-context";
 
 function Favorites() {
