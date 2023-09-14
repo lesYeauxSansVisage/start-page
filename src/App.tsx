@@ -1,6 +1,6 @@
 import "./App.scss";
-import Favorites from "./Favorites/Favorites";
-import Todos from "./Todos/Todos";
+import Favorites from "./components/Favorites/Favorites";
+import Todos from "./components/Todos/Todos";
 import { FavoritesProvider } from "./context/favorites-context";
 
 function App() {
