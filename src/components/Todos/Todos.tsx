@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./Todos.scss";
+import TodosList from "./TodosList";
 
 const Todos = () => {
   const [todos, setTodos] = useState([]);
@@ -14,7 +15,7 @@ const Todos = () => {
         />
       </form>
 
-      <ul className="todos__list"></ul>
+      <TodosList />
     </div>
   );
 };
