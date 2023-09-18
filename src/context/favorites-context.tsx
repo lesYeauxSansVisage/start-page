@@ -1,7 +1,7 @@
 import { createContext, useState, useEffect } from "react";
 import { FavoriteType } from "../interfaces/FavoriteType";
 
-import { FormValues } from "../Favorites/FavoritesForm/FavoritesForm";
+import { FormValues } from "../components/Favorites/FavoritesForm/FavoritesForm";
 import React from "react";
 
 type Props = React.PropsWithChildren;
