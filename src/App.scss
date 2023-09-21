@@ -12,9 +12,8 @@
     height: 100vh;
 
     display: grid;
-    grid-template-columns: max-content max-content;
+    grid-template-columns: max-content;
     grid-template-rows: max-content 1fr;
     gap: 1rem 1rem;
     justify-content: center;
-
 }
