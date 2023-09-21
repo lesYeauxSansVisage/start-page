@@ -9,8 +9,6 @@ function App() {
       <FavoritesProvider>
         <Favorites />
       </FavoritesProvider>
-
-      <Todos />
     </div>
   );
 }
