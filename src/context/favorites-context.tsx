@@ -30,11 +30,11 @@ export const FavoritesProvider = (props: Props) => {
         localStorage.getItem("favorites")!
       ) as FavoriteType[];
 
-      setFavorites(
-        savedFavorites.map((favorite) => {
-          return { ...favorite, id: Number(favorite.id) };
-        })
-      );
+      const formattedFavorites = savedFavorites.map((favorite) => {
+        return { ...favorite, id: Number(favorite.id) };
+      });
+
+      setFavorites(formattedFavorites);
     }
   }, []);
 
