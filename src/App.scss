@@ -4,16 +4,9 @@
 @import 'sass/components/background';
 @import 'sass/components/button-reset';
 
-
-
 .container {
-    padding: 50px;
     width: 100vw;
     height: 100vh;
 
-    display: grid;
-    grid-template-columns: max-content;
-    grid-template-rows: max-content 1fr;
-    gap: 1rem 1rem;
-    justify-content: center;
+    position: absolute;
 }
