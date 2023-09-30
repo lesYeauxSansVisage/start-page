@@ -3,10 +3,10 @@
 @import 'sass/base/typography';
 @import 'sass/components/background';
 @import 'sass/components/button-reset';
+@import 'sass/abstracts/mixins';
 
 .container {
     width: 100vw;
     height: 100vh;
-
     position: absolute;
 }
